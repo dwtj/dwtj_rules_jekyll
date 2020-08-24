@@ -1,0 +1,4 @@
+bazel-bin
+bazel-dwtj_rules_jekyll
+bazel-out
+bazel-testlogs

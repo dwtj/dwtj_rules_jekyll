@@ -1,0 +1,14 @@
+workspace(name = "smoke_test_basics")
+
+local_repository(
+    name = "dwtj_rules_jekyll",
+    path = "../../..",
+)
+
+load("@dwtj_rules_jekyll//jekyll:repositories.bzl", "local_jekyll_repository")
+
+local_jekyll_repository(name = "local_jekyll")
+
+load("@local_jekyll//:defs.bzl", "register_jekyll_toolchain")
+
+register_jekyll_toolchain()
