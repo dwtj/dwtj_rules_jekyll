@@ -5,6 +5,8 @@ local_repository(
     path = "../../..",
 )
 
+# CONFIGURE `@dwtj_rules_jekyll` ##############################################
+
 load("@dwtj_rules_jekyll//jekyll:repositories.bzl", "local_jekyll_repository")
 
 local_jekyll_repository(name = "local_jekyll")

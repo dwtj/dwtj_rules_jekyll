@@ -1,0 +1,33 @@
+workspace(name = "smoke_test_markdown_deps")
+
+local_repository(
+    name = "dwtj_rules_jekyll",
+    path = "../../..",
+)
+
+# CONFIGURE `@dwtj_rules_jekyll` ##############################################
+
+load("@dwtj_rules_jekyll//jekyll:repositories.bzl", "local_jekyll_repository")
+
+local_jekyll_repository(name = "local_jekyll")
+
+load("@local_jekyll//:defs.bzl", "register_jekyll_toolchain")
+
+register_jekyll_toolchain()
+
+# CONFIGURE `@dwtj_rules_markdown` FOR AUTOMATIC LINTING ######################
+
+load("@dwtj_rules_jekyll//test:workspaces/external_repositories.bzl", "fetch_dwtj_rules_markdown")
+
+fetch_dwtj_rules_markdown()
+
+load("@dwtj_rules_markdown//markdown:defs.bzl", "local_markdownlint_external_repository")
+
+local_markdownlint_external_repository(
+    name = "local_markdownlint",
+    config = "@//:.markdownlint.json",
+)
+
+load("@local_markdownlint//:defs.bzl", "register_local_markdownlint_toolchain")
+
+register_local_markdownlint_toolchain()
